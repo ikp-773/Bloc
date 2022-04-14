@@ -1,4 +1,5 @@
 import 'package:bloc_study_counter/logic/cubit/counter_cubit.dart';
+import 'package:bloc_study_counter/presentation/screens/second_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,58 +19,74 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(widget.title),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
-            ),
-            const SizedBox(height: 8),
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
-                if (state.wasIncremented!) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Incremented'),
-                    duration: Duration(milliseconds: 200),
-                  ));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Decremented'),
-                    duration: Duration(milliseconds: 200),
-                  ));
-                }
-              },
-              builder: (context, state) {
-                return Text(
-                  state.counterValue.toString(),
-                  style: Theme.of(context).textTheme.headline4,
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).decrement();
-                  },
-                  tooltip: 'Decrement',
-                  child: const Icon(Icons.remove_rounded),
-                ),
-                const SizedBox(width: 40),
-                FloatingActionButton(
-                  onPressed: () {
-                    BlocProvider.of<CounterCubit>(context).increment();
-                  },
-                  tooltip: 'Increment',
-                  child: const Icon(Icons.add_rounded),
-                ),
-              ],
-            )
-          ],
-        ),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          const Text(
+            'You have pushed the button this many times:',
+          ),
+          const SizedBox(height: 8),
+          BlocConsumer<CounterCubit, CounterState>(
+            listener: (context, state) {
+              if (state.wasIncremented!) {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Incremented'),
+                  duration: Duration(milliseconds: 200),
+                ));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                  content: Text('Decremented'),
+                  duration: Duration(milliseconds: 200),
+                ));
+              }
+            },
+            builder: (context, state) {
+              return Text(
+                state.counterValue.toString(),
+                style: Theme.of(context).textTheme.headline4,
+              );
+            },
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              FloatingActionButton(
+                onPressed: () {
+                  BlocProvider.of<CounterCubit>(context).decrement();
+                },
+                tooltip: 'Decrement',
+                child: const Icon(Icons.remove_rounded),
+              ),
+              const SizedBox(width: 40),
+              FloatingActionButton(
+                onPressed: () {
+                  BlocProvider.of<CounterCubit>(context).increment();
+                },
+                tooltip: 'Increment',
+                child: const Icon(Icons.add_rounded),
+              ),
+            ],
+          ),
+          const SizedBox(height: 50),
+          FloatingActionButton(
+            backgroundColor: Colors.amber,
+            onPressed: () {
+              Navigator.pushNamed(context, '/second');
+            },
+            tooltip: 'Second Screen',
+            child: const Icon(Icons.navigate_next_rounded),
+          ),
+          const SizedBox(height: 50),
+          FloatingActionButton(
+            backgroundColor: Colors.deepOrange,
+            onPressed: () {
+              Navigator.pushNamed(context, '/third');
+            },
+            tooltip: 'Second Screen',
+            child: const Icon(Icons.navigate_next_rounded),
+          ),
+        ],
       ),
     );
   }
