@@ -28,20 +28,7 @@ class _SecondScreenState extends State<SecondScreen> {
               'You have pushed the button this many times:',
             ),
             const SizedBox(height: 8),
-            BlocConsumer<CounterCubit, CounterState>(
-              listener: (context, state) {
-                if (state.wasIncremented!) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Incremented'),
-                    duration: Duration(milliseconds: 200),
-                  ));
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Decremented'),
-                    duration: Duration(milliseconds: 200),
-                  ));
-                }
-              },
+            BlocBuilder<CounterCubit, CounterState>(
               builder: (context, state) {
                 return Text(
                   state.counterValue.toString(),
